@@ -1,0 +1,86 @@
+ <meta charset="UTF-8">
+	<div class="container">
+		<h2>Liste des Commandes</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Nom du client</th>
+				<th>Prenom du client</th>
+				<th>Etat de la commande </th>
+				<th>Date</th>
+				<th>Commentaire</th>
+				<th>Total</th>
+				<th>Rue</th>
+				<th>Code postal</th>
+				<th>Ville</th>
+				<th colspan="2">Action</th>
+			</tr>
+
+
+			<tr ng-repeat="commande in commandeCtrl.commandes">
+				<td>{{commande.id}}</td>
+				<td>{{commande.user.nom}}</td>
+				<td>{{commande.user.prenom}}</td>
+				<td>{{commande.etat}}</td>
+				<td>{{commande.dte |date:'dd/MM/yyyy'}}</td>
+				<td>{{commande.commentaire}}</td>
+				<td>{{commande.total}}</td>
+				<td>{{commande.adresse.rue}}</td>
+				<td>{{commande.adresse.codePostal}}</td>
+				<td>{{commande.adresse.ville}}</td>
+				<td><a class="btn btn-info btn-xs" ng-click="commandeCtrl.edit(commande.id)">Editer</a></td>
+				<td><a class="btn btn-info btn-xs" ng-click="commandeCtrl.remove(commande.id)">Supprimer</a></td>
+			</tr>
+
+			<tr>
+				<td colspan="13"><a class="btn btn-info" ng-click="commandeCtrl.add()">Ajouter une commande</a></td>
+			</tr>
+		</table>
+		
+		<fieldset ng-show="commandeCtrl.commande">
+			<legend>Edition de la commande</legend>
+			<form method="post" ng-submit="commandeCtrl.save()">
+				<div class="form-group">
+					<label for="id">Id</label>
+					<input type="hidden" id="id" ng-model="commandeCtrl.commande.id" ng-readonly="commandeCtrl.mode=='edit'" />
+				</div>
+				<div class="form-group">
+					<label for="user">Client</label>
+					<select id="user" ng-model="commandeCtrl.commande.user" ng-options="user as user.nom for user in commandeCtrl.users track by user.id"></select>
+				</div>
+				<div class="form-group">
+					<label for="etat">Etat de la commande</label>
+					<select id="etat" ng-model="commandeCtrl.commande.etat" ng-options="etat as etat for etat in commandeCtrl.etats"></select>
+				</div>
+				<div class="form-group">
+					<label for="commentaire">Commentaire</label>
+					<input type="text" id="commentaire" ng-model="commandeCtrl.commande.commentaire"/>
+				</div>
+				<div class="form-group">
+					<label for="total">Prix Total</label>
+					<input type="text" id="total" ng-model="commandeCtrl.commande.total"/>
+				</div>
+				<div class="form-group">
+					<label for="dte">Date de la commande</label>
+					<input type="date" id="dte" ng-model="commandeCtrl.commande.dte"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.rue">Rue</label>
+					<input type="text" id="adresse.rue" ng-model="commandeCtrl.commande.adresse.rue"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.codePostal">Code postal</label>
+					<input type="text" id="adresse.codePostal" ng-model="commandeCtrl.commande.adresse.codePostal"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.ville">Ville</label>
+					<input type="text" id="adresse.ville" ng-model="commandeCtrl.commande.adresse.ville"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.pays">Pays</label>
+					<input type="text" id="adresse.pays" ng-model="commandeCtrl.commande.adresse.pays"/>
+				</div>
+				<input type="submit" value="Valider" class="btn btn-default"  />
+			</form>
+		</fieldset>
+	</div>

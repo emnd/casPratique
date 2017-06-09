@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="caspratique">
+<head>
+<meta charset="UTF-8">
+<title>{{'TITLE' | translate}}</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/forms.css" />
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/angular-translate.min.js"></script>
+<script type="text/javascript" src="js/angular-translate-loader-static-files.min.js"></script>
+<script type="text/javascript" src="js/app.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/user.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/commande.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/produit.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/categorie.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/motcle.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/produitmotcle.js"	charset="utf-8"></script>
+<script type="text/javascript" src="js/controllers/lignecommande.js"	charset="utf-8"></script>
+</head>
+<body>
+
+	<div ng-controller="TranslateController as translateCtrl">
+		<button ng-click="translateCtrl.changeLanguage('en')" translate="BUTTON_EN"></button>
+		<button ng-click="translateCtrl.changeLanguage('fr')" translate="BUTTON_FR"></button>
+	</div>
+
+	<section ng-controller="PanelController as panel">
+		<ul class="nav nav-pills">
+			<li ng-class="{active:panel.isSet('user')}"><a href ng-click="panel.setTab('user')">Utilisateurs</a></li>
+			<li ng-class="{active:panel.isSet('produit')}"><a href ng-click="panel.setTab('produit')">Produits</a></li>
+			<li ng-class="{active:panel.isSet('commande')}"><a href ng-click="panel.setTab('commande')">Commande</a></li>
+			<li ng-class="{active:panel.isSet('categorie')}"><a href ng-click="panel.setTab('categorie')">Categorie</a></li>
+			<li ng-class="{active:panel.isSet('motcle')}"><a href ng-click="panel.setTab('motcle')">Mots Cles</a></li>
+			<li ng-class="{active:panel.isSet('produitmotcle')}"><a href ng-click="panel.setTab('produitmotcle')">produits mots cles</a></li>
+			<li ng-class="{active:panel.isSet('lignecommande')}"><a href ng-click="panel.setTab('lignecommande')">Lignes Commandes</a></li>
+		</ul>
+
+		<user ng-show="panel.isSet('user')"> </user>
+		<produit ng-show="panel.isSet('produit')"> </produit>
+		<commande ng-show="panel.isSet('commande')"> </commande>
+		<categorie ng-show="panel.isSet('categorie')"> </categorie>
+		<motcle ng-show="panel.isSet('motcle')"> </motcle>
+		<produitmotcle ng-show="panel.isSet('produitmotcle')"> </produitmotcle>
+		<lignecommande ng-show="panel.isSet('lignecommande')"> </lignecommande>
+		
+	</section>
+</body>
+</html>

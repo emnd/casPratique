@@ -1,0 +1,51 @@
+
+<meta charset="UTF-8">
+<div class="container">
+		<h2>Liste des lignes de commandes</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Produit</th>
+				<th>Quantité</th>
+				<th>Date de la Commande</th>
+				<th colspan="2">Action</th>
+			</tr>
+
+
+			<tr ng-repeat="lignecommande in lignecommandeCtrl.lignecommandes">
+				<td>{{lignecommande.id}}</td>
+				<td>{{lignecommande.produit.nom}}</td>
+				<td>{{lignecommande.quantite}}</td>
+				<td>{{lignecommande.commande.dte|date:'dd/MM/yyyy'}}</td>
+				<td><a class="btn btn-info btn-xs" ng-click="lignecommandeCtrl.edit(lignecommande.id)">Editer</a></td>
+				<td><a class="btn btn-info btn-xs" ng-click="lignecommandeCtrl.remove(lignecommande.id)">Supprimer</a></td>
+			</tr>
+
+			<tr>
+				<td colspan="7"><a class="btn btn-info" ng-click="lignecommandeCtrl.add()">Ajouter d'un mot-clé</a></td>
+			</tr>
+		</table>
+		
+		<fieldset ng-show="lignecommandeCtrl.lignecommande">
+			<legend>Edition d'une ligne de commande</legend>
+			<form method="post" ng-submit="lignecommandeCtrl.save()">
+				<div class="form-group">
+					<input type="hidden" id="id" ng-model="lignecommandeCtrl.lignecommande.id"/>
+				</div>
+				<div class="form-group">
+					<label for="produit">Nom du produit</label>
+					<select id="produit" ng-model="lignecommandeCtrl.lignecommande.produit" ng-options="produit as produit.nom for produit in lignecommandeCtrl.produits track by produit.id"></select>
+				</div>
+				<div class="form-group">
+					<label for="quantite">Quantité</label>
+					<input type="text" id="quantite" ng-model="lignecommandeCtrl.lignecommande.quantite"/>
+				</div>
+				<div class="form-group">
+					<label for="commande">Date la commande</label>
+					<select id="commande" ng-model="lignecommandeCtrl.lignecommande.commande" ng-options="commande as commande.dte|date:'dd/MM/yyyy' for commande in lignecommandeCtrl.commandes track by commande.id"></select>
+				</div>
+				
+				<input type="submit" value="Valider" class="btn btn-default"  />
+			</form>
+		</fieldset>
+</div>

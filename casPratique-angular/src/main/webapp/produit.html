@@ -1,0 +1,62 @@
+ <meta charset="UTF-8">
+	<div class="container">
+		<h2>Liste des produits</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Prix</th>
+				<th>Quantites</th>
+				<th>Categorie</th>
+				<th colspan="2">Action</th>
+			</tr>
+
+
+			<tr ng-repeat="produit in produitCtrl.produits">
+				<td>{{produit.id}}</td>
+				<td>{{produit.nom}}</td>
+				<td>{{produit.description}}</td>
+				<td>{{produit.prix}}</td>
+				<td>{{produit.stock}}</td>
+				<td>{{produit.categorie.nom}}</td>
+				<td><a class="btn btn-info btn-xs" ng-click="produitCtrl.edit(produit.id)">Editer</a></td>
+				<td><a class="btn btn-info btn-xs" ng-click="produitCtrl.remove(produit.id)">Supprimer</a></td>
+			</tr>
+
+			<tr>
+				<td colspan="13"><a class="btn btn-info" ng-click="produitCtrl.add()">Ajouter un produit</a></td>
+			</tr>
+		</table>
+		
+		<fieldset ng-show="produitCtrl.produit">
+			<legend>Edition du produit</legend>
+			<form method="post" ng-submit="produitCtrl.save()">
+				<div class="form-group">
+					<label for="id">Id</label>
+					<input type="hidden" id="id" ng-model="produitCtrl.produit.id" ng-readonly="produitCtrl.mode=='edit'" />
+				</div>
+				<div class="form-group">
+					<label for="nom">Nom</label>
+					<input type="text" id="nom" ng-model="produitCtrl.produit.nom"/>
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<input type="text" id="description" ng-model="produitCtrl.produit.description"/>
+				</div>
+				<div class="form-group">
+					<label for="prix">Prix</label>
+					<input type="text" id="prix" ng-model="produitCtrl.produit.prix"/>
+				</div>
+				<div class="form-group">
+					<label for="stock">Quantite</label>
+					<input type="stock" id="stock" ng-model="produitCtrl.produit.stock"/>
+				</div>
+				<div class="form-group">
+					<label for="categorie">Categorie</label>
+					<select id="categorie" ng-model="produitCtrl.produit.categorie" ng-options="categorie as categorie.nom for categorie in produitCtrl.categories track by categorie.id"></select>
+				</div>
+				<input type="submit" value="Valider" class="btn btn-default"  />
+			</form>
+		</fieldset>
+	</div>

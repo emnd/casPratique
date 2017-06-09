@@ -1,0 +1,82 @@
+ <meta charset="UTF-8">
+	<div class="container">
+		<h2>Liste des utilisateurs</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Type</th>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Login</th>
+				<th>Rue</th>
+				<th>Code postal</th>
+				<th>Ville</th>
+				<th colspan="2">Action</th>
+			</tr>
+
+
+			<tr ng-repeat="user in userCtrl.users">
+				<td>{{user.id}}</td>
+				<td>{{user.type}}</td>
+				<td>{{user.nom}}</td>
+				<td>{{user.prenom}}</td>
+				<td>{{user.login}}</td>
+				<td>{{user.adresse.rue}}</td>
+				<td>{{user.adresse.codePostal}}</td>
+				<td>{{user.adresse.ville}}</td>
+				<td><a class="btn btn-info btn-xs" ng-click="userCtrl.edit(user.id)">Editer</a></td>
+				<td><a class="btn btn-info btn-xs" ng-click="userCtrl.remove(user.id)">Supprimer</a></td>
+			</tr>
+
+			<tr>
+				<td colspan="13"><a class="btn btn-info" ng-click="userCtrl.add()">Ajouter un client</a></td>
+			</tr>
+		</table>
+		
+		<fieldset ng-show="userCtrl.user">
+			<legend>Edition de l'Utilisateur</legend>
+			<form method="post" ng-submit="userCtrl.save()">
+				<div class="form-group">
+					<label for="id">Id</label>
+					<input type="hidden" id="id" ng-model="userCtrl.user.id" ng-readonly="userCtrl.mode=='edit'" />
+				</div>
+				<div class="form-group">
+					<label for="type">Type</label>
+					<select id="type" ng-model="userCtrl.user.type" ng-options="type as type for type in userCtrl.types"></select>
+				</div>
+				<div class="form-group">
+					<label for="nom">Nom</label>
+					<input type="text" id="nom" ng-model="userCtrl.user.nom"/>
+				</div>
+				<div class="form-group">
+					<label for="prenom">Prénom</label>
+					<input type="text" id="prenom" ng-model="userCtrl.user.prenom"/>
+				</div>
+				<div class="form-group">
+					<label for="login">Login</label>
+					<input type="text" id="login" ng-model="userCtrl.user.login"/>
+				</div>
+				<div class="form-group">
+					<label for="motDePasse">Mot De Passe</label>
+					<input type="motDePasse" id="motDePasse" ng-model="userCtrl.user.motDePasse"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.rue">Rue</label>
+					<input type="text" id="adresse.rue" ng-model="userCtrl.user.adresse.rue"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.codePostal">Code postal</label>
+					<input type="text" id="adresse.codePostal" ng-model="userCtrl.user.adresse.codePostal"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.ville">Ville</label>
+					<input type="text" id="adresse.ville" ng-model="userCtrl.user.adresse.ville"/>
+				</div>
+				<div class="form-group">
+					<label for="adresse.pays">Pays</label>
+					<input type="text" id="adresse.pays" ng-model="userCtrl.user.adresse.pays"/>
+				</div>
+				<input type="submit" value="Valider" class="btn btn-default"  />
+			</form>
+		</fieldset>
+	</div>

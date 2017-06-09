@@ -1,0 +1,44 @@
+ <meta charset="UTF-8">
+	<div class="container">
+		<h2>Liste des categories</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th colspan="2">Action</th>
+			</tr>
+
+
+			<tr ng-repeat="categorie in categorieCtrl.categories">
+				<td>{{categorie.id}}</td>
+				<td>{{categorie.nom}}</td>
+				<td>{{categorie.description}}</td>
+				<td><a class="btn btn-info btn-xs" ng-click="categorieCtrl.edit(categorie.id)">Editer</a></td>
+				<td><a class="btn btn-info btn-xs" ng-click="categorieCtrl.remove(categorie.id)">Supprimer</a></td>
+			</tr>
+
+			<tr>
+				<td colspan="13"><a class="btn btn-info" ng-click="categorieCtrl.add()">Ajouter une categorie</a></td>
+			</tr>
+		</table>
+		
+		<fieldset ng-show="categorieCtrl.categorie">
+			<legend>Edition de la categorie</legend>
+			<form method="post" ng-submit="categorieCtrl.save()">
+				<div class="form-group">
+					<label for="id">Id</label>
+					<input type="hidden" id="id" ng-model="categorieCtrl.categorie.id" ng-readonly="categorieCtrl.mode=='edit'" />
+				</div>
+				<div class="form-group">
+					<label for="nom">Nom</label>
+					<input type="text" id="nom" ng-model="categorieCtrl.categorie.nom"/>
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<input type="text" id="description" ng-model="categorieCtrl.categorie.description"/>
+				</div>
+				<input type="submit" value="Valider" class="btn btn-default"  />
+			</form>
+		</fieldset>
+	</div>
